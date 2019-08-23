@@ -70,7 +70,7 @@ public class JYFilterView: UIView {
     /// - Parameters:
     ///   - data: data
     ///   - style: style
-    convenience init(data: JYFilterPrototcol, style: JYFilterViewStyle = JYFilterViewStyle()){
+    public convenience init(data: JYFilterPrototcol, style: JYFilterViewStyle = JYFilterViewStyle()){
         self.init()
         self.data = data
         self.style = style
