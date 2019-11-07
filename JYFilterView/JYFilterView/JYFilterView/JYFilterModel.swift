@@ -103,7 +103,7 @@ public struct JYFilterViewLabelStyle{
     // 字体颜色
     public var textColor: UIColor = UIColor.init(red: 47.0/255.0, green: 47.0/255.0, blue: 47.0/255.0, alpha: 1)
     // 字体大小
-    public var textFont: UIFont = UIFont.systemFont(ofSize: 12, weight: .semibold)
+    public var textFont: UIFont = UIFont.systemFont(ofSize: 16, weight: .regular)
     // 初始化
     public init(backgroundColor: UIColor = UIColor.clear, textColor: UIColor = UIColor.init(red: 47.0/255.0, green: 47.0/255.0, blue: 47.0/255.0, alpha: 1), textFont: UIFont = UIFont.systemFont(ofSize: 12, weight: .semibold)){
         self.backgroundColor = backgroundColor
@@ -114,11 +114,13 @@ public struct JYFilterViewLabelStyle{
 /// 筛选子视图样式模型
 public struct JYFilterItemViewStyle{
     // 正常状态
-    public var normalStyle: JYFilterItemViewStateStyle = JYFilterItemViewStateStyle.init(backgroundColors: [UIColor.init(red: 255.0/255.0, green: 255.0/255.0, blue: 255.0/255.0, alpha: 1)], cornerRadius: 6, borderWidth: 1, borderColor: UIColor.init(red: 255.0/255.0, green: 157.0/255.0, blue: 76.0/255.0, alpha: 1), nameColor: UIColor.init(red: 255.0/255.0, green: 157.0/255.0, blue: 76.0/255.0, alpha: 1), nameFont: UIFont.systemFont(ofSize: 13, weight: .regular))
+    public var normalStyle: JYFilterItemViewStateStyle = JYFilterItemViewStateStyle.init(backgroundColors: [UIColor.init(red: 1, green: 1, blue: 1, alpha: 1)], cornerRadius: 6, borderWidth: 1, borderColor: UIColor.init(red: 0.5, green: 0.31, blue: 0.14, alpha: 1), nameColor: UIColor.init(red: 0.5, green: 0.31, blue: 0.14, alpha: 1), nameFont: UIFont.systemFont(ofSize: 13, weight: .regular))
     // 选中状态
-    public var selectedStyle:JYFilterItemViewStateStyle = JYFilterItemViewStateStyle.init(backgroundColors: [UIColor.init(red: 255.0/255.0, green: 166.0/255.0, blue: 77.0/255.0, alpha: 1),UIColor.init(red: 253.0/255.0, green: 144.0/255.0, blue: 75.0/255.0, alpha: 1)], cornerRadius: 6, borderWidth: 0, borderColor: UIColor.init(red: 255.0/255.0, green: 157.0/255.0, blue: 76.0/255.0, alpha: 1), nameColor: UIColor.init(red: 255.0/255.0, green: 255.0/255.0, blue: 255.0/255.0, alpha: 1), nameFont: UIFont.systemFont(ofSize: 13, weight: .bold))
+    public var selectedStyle:JYFilterItemViewStateStyle = JYFilterItemViewStateStyle.init(backgroundColors: [UIColor.init(red: 0.8, green: 0.68, blue: 0.49, alpha: 1),UIColor.init(red: 1, green: 0.91, blue: 0.79, alpha: 1)], cornerRadius: 6, borderWidth: 0, borderColor: UIColor.init(red: 0.5, green: 0.31, blue: 0.14, alpha: 1), nameColor: UIColor.init(red: 0.5, green: 0.31, blue: 0.14, alpha: 1), nameFont: UIFont.systemFont(ofSize: 13, weight: .regular))
     // 初始化
-    public init(normalStyle: JYFilterItemViewStateStyle = JYFilterItemViewStateStyle.init(backgroundColors: [UIColor.init(red: 255.0/255.0, green: 255.0/255.0, blue: 255.0/255.0, alpha: 1)], cornerRadius: 6, borderWidth: 1, borderColor: UIColor.init(red: 255.0/255.0, green: 157.0/255.0, blue: 76.0/255.0, alpha: 1), nameColor: UIColor.init(red: 255.0/255.0, green: 157.0/255.0, blue: 76.0/255.0, alpha: 1), nameFont: UIFont.systemFont(ofSize: 13, weight: .regular)), selectedStyle:JYFilterItemViewStateStyle = JYFilterItemViewStateStyle.init(backgroundColors: [UIColor.init(red: 255.0/255.0, green: 166.0/255.0, blue: 77.0/255.0, alpha: 1),UIColor.init(red: 253.0/255.0, green: 144.0/255.0, blue: 75.0/255.0, alpha: 1)], cornerRadius: 6, borderWidth: 0, borderColor: UIColor.init(red: 255.0/255.0, green: 157.0/255.0, blue: 76.0/255.0, alpha: 1), nameColor: UIColor.init(red: 255.0/255.0, green: 255.0/255.0, blue: 255.0/255.0, alpha: 1), nameFont: UIFont.systemFont(ofSize: 13, weight: .bold))){
+    public init(
+        normalStyle: JYFilterItemViewStateStyle = JYFilterItemViewStateStyle.init(backgroundColors: [UIColor.init(red: 1, green: 1, blue: 1, alpha: 1)], cornerRadius: 6, borderWidth: 1, borderColor: UIColor.init(red: 0.5, green: 0.31, blue: 0.14, alpha: 1), nameColor: UIColor.init(red: 0.5, green: 0.31, blue: 0.14, alpha: 1), nameFont: UIFont.systemFont(ofSize: 13, weight: .regular)),
+        selectedStyle:JYFilterItemViewStateStyle = JYFilterItemViewStateStyle.init(backgroundColors: [UIColor.init(red: 0.8, green: 0.68, blue: 0.49, alpha: 1),UIColor.init(red: 1, green: 0.91, blue: 0.79, alpha: 1)], cornerRadius: 6, borderWidth: 0, borderColor: UIColor.init(red: 0.5, green: 0.31, blue: 0.14, alpha: 1), nameColor: UIColor.init(red: 0.5, green: 0.31, blue: 0.14, alpha: 1), nameFont: UIFont.systemFont(ofSize: 13, weight: .regular))){
         self.normalStyle = normalStyle
         self.selectedStyle = selectedStyle
     }

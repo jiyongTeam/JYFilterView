@@ -43,12 +43,14 @@ public class JYFilterItemView: UIView {
         return g
     }()
     /// 名称
-    private lazy var nameTextField: UITextField = {
-        let textField = UITextField()
+    private lazy var nameLabel: UILabel = {
+        let textField = UILabel()
+        textField.isUserInteractionEnabled = true
         textField.translatesAutoresizingMaskIntoConstraints = false
         textField.font = UIFont.systemFont(ofSize: 13, weight: .regular)
         textField.textColor = UIColor.init(red: 255.0/255.0, green: 157.0/255.0, blue: 76.0/255.0, alpha: 1)
         textField.textAlignment = .center
+        textField.numberOfLines = 0
         return textField
     }()
     
@@ -63,7 +65,7 @@ public class JYFilterItemView: UIView {
     private override init(frame: CGRect) {
         super.init(frame: frame)
         self.layer.insertSublayer(gradiednt, at: 0)
-        nameTextField.delegate = self
+        self.nameLabel.addGestureRecognizer(UITapGestureRecognizer.init(target: self, action: #selector(click(by:))))
         configInitializeLayout()
     }
     internal required init?(coder aDecoder: NSCoder) {
@@ -103,9 +105,10 @@ extension JYFilterItemView{
     }
 }
 
-// MARK: ----UITextField delegate
-extension JYFilterItemView: UITextFieldDelegate{
-    public func textFieldShouldBeginEditing(_ textField: UITextField) -> Bool {
+// MARK: ----私有方法
+extension JYFilterItemView: UITextViewDelegate{
+    // 点击事件
+    @objc func click(by gesture: UITapGestureRecognizer)  {
         if let nextState = self.delegate?.getNextState(itemView: self, currentState: currentStatus) {
             /// 更新状态样式
             if nextState != self.currentStatus{
@@ -113,18 +116,6 @@ extension JYFilterItemView: UITextFieldDelegate{
                 self.data?.state = self.currentStatus
             }
         }
-        return false
-    }
-    public func textFieldShouldReturn(_ textField: UITextField) -> Bool {
-        textField.resignFirstResponder()
-        return true
-    }
-    public func textFieldDidEndEditing(_ textField: UITextField) {
-        //结束编辑更新为默认状态
-        let content = textField.text ?? ""
-        self.data?.state = .normalState
-        self.data?.name = content
-        currentStatus = .normalState
     }
 }
 
@@ -138,7 +129,7 @@ extension JYFilterItemView{
             return
         }
         self.currentStatus = data.state
-        nameTextField.text = data.name
+        nameLabel.text = data.name
     }
     /// 更新页面状态
     private func configViewState(){
@@ -166,8 +157,8 @@ extension JYFilterItemView{
             cgColorsArr = [UIColor.white.cgColor, UIColor.white.cgColor]
         }
         gradiednt.colors = cgColorsArr
-        nameTextField.textColor = style.nameColor
-        nameTextField.font = style.nameFont
+        nameLabel.textColor = style.nameColor
+        nameLabel.font = style.nameFont
     }
 }
 // MARK: - UI
@@ -175,10 +166,10 @@ extension JYFilterItemView{
     /// 初始化必须布局
     private func configInitializeLayout(){
         self.translatesAutoresizingMaskIntoConstraints = false
-        let vd = ["nameTextField": nameTextField]
-        self.addSubview(nameTextField)
-        self.addConstraints(NSLayoutConstraint.constraints(withVisualFormat: "|[nameTextField]|", options: [], metrics: nil, views: vd))
-        self.addConstraints(NSLayoutConstraint.constraints(withVisualFormat: "V:|[nameTextField]|", options: [], metrics: nil, views: vd))
+        let vd = ["nameLabel": nameLabel]
+        self.addSubview(nameLabel)
+        self.addConstraints(NSLayoutConstraint.constraints(withVisualFormat: "|[nameLabel]|", options: [], metrics: nil, views: vd))
+        self.addConstraints(NSLayoutConstraint.constraints(withVisualFormat: "V:|[nameLabel]|", options: [], metrics: nil, views: vd))
     }
 }
 

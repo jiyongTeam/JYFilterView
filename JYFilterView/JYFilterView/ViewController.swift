@@ -13,8 +13,14 @@ class ViewController: UIViewController {
     //筛选视图数据源
     private lazy var filterViewData: JYFilterModel = {
         var itemList: [JYFilterItemModel] = []
+        var name: String = ""
         for i in 0..<10{
-           let item =  JYFilterItemModel.init(id: "\(i)", name: "\(i * 100)", state: .normalState)
+            if i == 0{
+                name = "免费体验\n超强吸引力"
+            }else{
+                name = "\(i * 100)"
+            }
+           let item =  JYFilterItemModel.init(id: "\(i)", name: name , state: .normalState)
             itemList.append(item)
         }
         let model = JYFilterModel.init(id: "1", title: "111", itemList: itemList)
@@ -69,7 +75,9 @@ extension ViewController{
         titleStyle.textColor = UIColor.red
         viewStyle.titleStyle = titleStyle
         // item样式,正常/选中
-        let itemViewStyle = JYFilterItemViewStyle(normalStyle: JYFilterItemViewStateStyle.init(backgroundColors: [UIColor.lightGray], cornerRadius: 8, borderWidth: 1, borderColor: UIColor.blue, nameColor: UIColor.blue, nameFont: UIFont.systemFont(ofSize: 14, weight: .regular)), selectedStyle: JYFilterItemViewStateStyle.init(backgroundColors: [UIColor.orange], cornerRadius: 8, borderWidth: 0, borderColor: UIColor.blue, nameColor: UIColor.white, nameFont: UIFont.systemFont(ofSize: 14, weight: .regular)))
+        let itemViewStyle = JYFilterItemViewStyle(
+                normalStyle: JYFilterItemViewStateStyle.init(backgroundColors: [UIColor.lightGray], cornerRadius: 8, borderWidth: 1, borderColor: UIColor.blue, nameColor: UIColor.blue, nameFont: UIFont.systemFont(ofSize: 14, weight: .regular)),
+                selectedStyle: JYFilterItemViewStateStyle.init(backgroundColors: [UIColor.orange], cornerRadius: 8, borderWidth: 0, borderColor: UIColor.blue, nameColor: UIColor.white, nameFont: UIFont.systemFont(ofSize: 14, weight: .regular)))
         viewStyle.itemViewStyle = itemViewStyle
         //更新样式
         multiSelectView.updateViewStyle(viewStyle)
@@ -81,6 +89,9 @@ extension ViewController{
 extension ViewController{
     func configUI(){
         view.backgroundColor = UIColor.lightGray
+        singleSelectView.setSelectFilterViewAction { (id) in
+            print(id)
+        }
         let vd: [String: UIView] = [
             "defaultView": defaultView,
             "singleSelectView": singleSelectView,
