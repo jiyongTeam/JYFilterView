@@ -126,13 +126,19 @@ extension JYFilterView{
             return
         }
         selectedItems.removeAll()
-        selectedItems.append(contentsOf: items)
-        for index in 0..<data.itemList.count{
-            let itemModel = data.itemList[index]
-            let itemView = itemViewList[index]
-            if selectedItems.firstIndex(where: {$0.id == itemModel.id}) != nil {
-                itemView.updateStatus(by: .selectState)
-            }else{
+        if items.count > 0{
+            selectedItems.append(contentsOf: items)
+            for index in 0..<data.itemList.count{
+                let itemModel = data.itemList[index]
+                let itemView = itemViewList[index]
+                if selectedItems.firstIndex(where: {$0.id == itemModel.id}) != nil {
+                    itemView.updateStatus(by: .selectState)
+                }else{
+                    itemView.updateStatus(by: .normalState)
+                }
+            }
+        }else{
+            for itemView in itemViewList{
                 itemView.updateStatus(by: .normalState)
             }
         }
@@ -145,13 +151,19 @@ extension JYFilterView{
             return
         }
         selectedItems.removeAll()
-        for index in 0..<data.itemList.count{
-            let itemModel = data.itemList[index]
-            let itemView = itemViewList[index]
-            if itemIds.firstIndex(where: {$0 == itemModel.id}) != nil {
-                itemView.updateStatus(by: .selectState)
-                selectedItems.append(itemModel)
-            }else{
+        if itemIds.count > 0{
+            for index in 0..<data.itemList.count{
+                let itemModel = data.itemList[index]
+                let itemView = itemViewList[index]
+                if itemIds.firstIndex(where: {$0 == itemModel.id}) != nil {
+                    itemView.updateStatus(by: .selectState)
+                    selectedItems.append(itemModel)
+                }else{
+                    itemView.updateStatus(by: .normalState)
+                }
+            }
+        }else{
+            for itemView in itemViewList{
                 itemView.updateStatus(by: .normalState)
             }
         }
@@ -300,7 +312,7 @@ extension JYFilterView{
         guard let data = self.data else {
             return
         }
-        var itemList = data.itemList
+        let itemList = data.itemList
         var selectList = selectedItems
         let index = itemView.tag
         let itemId = itemList[index].id
